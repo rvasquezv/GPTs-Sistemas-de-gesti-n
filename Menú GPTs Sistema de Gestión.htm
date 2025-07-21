@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú de Acceso a GPTs con CSS y JS</title>
+    <!-- Carga de Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Estilos Generales --- */
+        :root {
+            --primary-blue-light: #3b82f6;
+            --primary-blue-medium: #1945d1;
+            --primary-blue-dark: #0021a7;
+            --primary-blue-darker: #001489; /* Tono de azul solicitado */
+            --text-light: #e0e7ff;
+            --text-dark: #334155;
+            --card-bg: #ffffff; /* Cambiado a blanco sólido */
+            --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-heavy: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            color: var(--text-dark);
+            /* Fondo con gradiente animado */
+            background: linear-gradient(-45deg, var(--primary-blue-light), var(--primary-blue-medium), var(--primary-blue-dark), var(--primary-blue-darker));
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* --- Encabezado y Pie de Página --- */
+        .main-header, .main-footer {
+            text-align: center;
+            color: white;
+        }
+
+        .main-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .main-header p {
+            font-size: 1.5rem; /* Aumentado el tamaño del texto */
+            color: var(--text-light);
+            margin-top: 0;
+            margin-bottom: 3rem; 
+        }
+        
+        .main-footer {
+            margin-top: 4rem;
+            color: var(--text-light);
+        }
+
+        .footer-quote {
+            font-style: italic;
+            max-width: 650px;
+            margin: 0 auto 0.5rem auto;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+
+        .footer-attribution {
+            color: var(--text-light);
+        }
+
+        /* --- Alerta de VPN --- */
+        .alert-box {
+            background-color: #fef08a; /* Fondo amarillo */
+            border-left: 4px solid #f59e0b; /* Borde ámbar oscuro */
+            color: #1f2937; /* Letras negras/gris oscuro */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            max-width: 896px;
+            margin: 3rem auto;
+            box-shadow: var(--shadow-light);
+        }
+        .alert-box strong {
+            font-weight: 600;
+        }
+
+        /* --- Contenedor y Tarjetas --- */
+        .card-grid {
+            display: grid;
+            gap: 1.5rem;
+            /* Diseño responsivo con CSS Grid y Media Queries */
+            grid-template-columns: 1fr; /* 1 columna por defecto (móviles) */
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            /* backdrop-filter: blur(5px); */ /* Eliminado para que el fondo sea sólido */
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .card-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem 0;
+            color: var(--text-dark);
+        }
+
+        .card-description {
+            font-size: 1rem;
+            color: #475569;
+            margin: 0;
+        }
+
+        /* --- Media Queries para Responsividad --- */
+        /* Tablets (a partir de 640px) */
+        @media (min-width: 640px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+            }
+            .main-header h1 {
+                font-size: 3rem;
+            }
+        }
+
+        /* Laptops pequeñas (a partir de 1024px) */
+        @media (min-width: 1024px) {
+            .card-grid {
+                grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+            }
+        }
+        
+        /* Desktops grandes (a partir de 1280px) */
+        @media (min-width: 1280px) {
+            .card-grid {
+                grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="main-header">
+            <h1>GPTs de Sistemas de Gestión 🦾</h1>
+            <p>Impulsando la mejora continua</p>
+        </header>
+
+        <div class="alert-box">
+            <p><strong>⚠ Atención:</strong> Para ingresar a los GPTs, es indispensable tener el <strong>VPN activo</strong>.</p>
+        </div>
+
+        <main class="card-grid" id="card-container">
+            
+            <a href="https://chatgpt.com/g/g-678f9c729f988191aa584bf0ade1db66-iso-9001-sistemas-de-gestion-de-la-calidad" target="_blank" rel="noopener noreferrer" class="card">
+                <div class="card-emoji">🌍</div>
+                <h2 class="card-title">ISO 9001</h2>
+                <p class="card-description">Sistemas de gestión de la calidad.</p>
+            </a>
+
+            <a href="https://chatgpt.com/g/g-6798f3b740f88191b81b3ee95e5ccfde-rrhh-gestion-por-competencias" target="_blank" rel="noopener noreferrer" class="card">
+                <div class="card-emoji">✍️</div>
+                <h2 class="card-title">RRHH</h2>
+                <p class="card-description">Gestión por competencias.</p>
+            </a>
+
+            <a href="https://chatgpt.com/g/g-67992e4b581081919849d6cab326d34c-gestion-del-riesgo-en-las-organizaciones" target="_blank" rel="noopener noreferrer" class="card">
+                <div class="card-emoji">🏭</div>
+                <h2 class="card-title">Gestión del Riesgo</h2>
+                <p class="card-description">En las organizaciones.</p>
+            </a>
+
+            <a href="https://chatgpt.com/g/g-67b613c50ae481919284420939d25f59-gestion-documental-en-las-organizaciones" target="_blank" rel="noopener noreferrer" class="card">
+                <div class="card-emoji">💻</div>
+                <h2 class="card-title">Gestión Documental</h2>
+                <p class="card-description">En las organizaciones.</p>
+            </a>
+
+            <a href="https://chatgpt.com/g/g-67b8cbe18fec8191a272fbaae3dcdc85-lab-fisico-quimico-microbiologico" target="_blank" rel="noopener noreferrer" class="card">
+                <div class="card-emoji">🧪</div>
+                <h2 class="card-title">Laboratorio</h2>
+                <p class="card-description">Físico-Químico y Microbiológico 🧫</p>
+            </a>
+
+            <a href="https://chatgpt.com/g/g-67d04cd4482881919e840b29e858296f-gestion-de-mantenimiento" target="_blank" rel="noopener noreferrer" class="card">
+                <div class="card-emoji">⚙️</div>
+                <h2 class="card-title">Gestión de Mantenimiento</h2>
+                <p class="card-description">Optimización de activos y recursos.</p>
+            </a>
+
+            <a href="https://chatgpt.com/g/g-683896f4c8ec8191814d0155d6b6fdea-gestion-de-inocuidad-de-los-alimentos" target="_blank" rel="noopener noreferrer" class="card">
+                <div class="card-emoji">🍴</div>
+                <h2 class="card-title">Gestión de Inocuidad</h2>
+                <p class="card-description">De los alimentos.</p>
+            </a>
+
+            <a href="https://chatgpt.com/g/g-68385bcec0348191972e41660f441541-gestion-ambiental-empresarial" target="_blank" rel="noopener noreferrer" class="card">
+                <div class="card-emoji">🍃</div>
+                <h2 class="card-title">Gestión Ambiental</h2>
+                <p class="card-description">Empresarial y sostenible.</p>
+            </a>
+            
+        </main>
+
+        <footer class="main-footer">
+            <p class="footer-quote">"La IA generativa no es un sustituto de la creatividad humana, sino una herramienta que puede aumentarla y potenciarla."</p>
+            <p class="footer-attribution">— Sam Altman, 2024.</p>
+        </footer>
+    </div>
+
+    <!-- El script de búsqueda ha sido eliminado -->
+
+</body>
+</html>
